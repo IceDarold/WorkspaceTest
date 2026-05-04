@@ -35,9 +35,9 @@ const ScoreIndicator = ({ label, score, icon: Icon, max = 5 }: { label: string, 
 
 const NoiseIndicator = ({ level }: { level: NoiseLevel }) => {
   const config = {
-    quiet: { color: 'text-green-600 bg-green-50', label: 'Quiet' },
-    moderate: { color: 'text-yellow-600 bg-yellow-50', label: 'Moderate' },
-    loud: { color: 'text-red-600 bg-red-50', label: 'Loud' },
+    quiet: { color: 'text-green-600 bg-green-50', label: 'Тихо' },
+    moderate: { color: 'text-yellow-600 bg-yellow-50', label: 'Умеренно' },
+    loud: { color: 'text-red-600 bg-red-50', label: 'Шумно' },
   }[level];
 
   return (
@@ -54,13 +54,13 @@ export default function App() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [filters, setFilters] = useState<FilterState>({
     searchQuery: '',
-    city: 'Limassol',
+    city: 'Екатеринбург',
     tags: []
   });
 
   const availableTags = [
-    'Fast Wi-Fi', 'Many sockets', 'Quiet', 'Open now', 
-    'Budget-friendly', 'Good for calls', 'Coffee available', '24/7 Access'
+    'Быстрый Wi-Fi', 'Много розеток', 'Тихо', 'Открыто сейчас', 
+    'Бюджетно', 'Для звонков', 'Есть кофе', 'Доступ 24/7'
   ];
 
   const filteredSpaces = useMemo(() => {
@@ -112,7 +112,7 @@ export default function App() {
               type="text" 
               value={filters.searchQuery}
               onChange={(e) => setFilters(prev => ({ ...prev, searchQuery: e.target.value }))}
-              placeholder="Find a space in Limassol..."
+              placeholder="Найти коворкинг в Екатеринбурге..."
               className="pl-10 pr-4 py-2 bg-stone-100 border-none rounded-full w-80 text-sm focus:ring-2 focus:ring-black/5 outline-none transition-all"
             />
           </div>
@@ -124,13 +124,13 @@ export default function App() {
               onClick={() => setActiveTab('discover')}
               className={`hover:text-black transition-colors ${activeTab === 'discover' ? 'text-black font-bold border-b-2 border-black pb-1 translate-y-0.5' : ''}`}
             >
-              Explore
+              Обзор
             </button>
             <button 
               onClick={() => setActiveTab('saved')}
               className={`hover:text-black transition-colors flex items-center gap-1.5 ${activeTab === 'saved' ? 'text-black font-bold border-b-2 border-black pb-1 translate-y-0.5' : ''}`}
             >
-              Shortlist
+              Избранное
               {savedIds.size > 0 && <span className="bg-black text-white text-[10px] px-1.5 py-0.5 rounded-full">{savedIds.size}</span>}
             </button>
           </div>
@@ -143,13 +143,13 @@ export default function App() {
               onClick={() => setActiveTab('discover')}
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${activeTab === 'discover' ? 'bg-white shadow-sm text-black' : 'text-stone-400'}`}
             >
-              Explore
+              Обзор
             </button>
             <button 
               onClick={() => setActiveTab('saved')}
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${activeTab === 'saved' ? 'bg-white shadow-sm text-black' : 'text-stone-400'}`}
             >
-              Shortlist
+              Избранное
             </button>
           </div>
         </div>
@@ -170,20 +170,20 @@ export default function App() {
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-stone-200 pb-8">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 uppercase tracking-[0.2em] text-[10px] font-black text-stone-400">
-                      Discovery • Limassol, Cyprus
+                      Открытие • Екатеринбург, Россия
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold serif leading-[0.9] tracking-tighter">
-                      Find your focus <br />in the city.
+                      Найди свой фокус <br />в городе.
                     </h1>
                   </div>
                   <div className="md:text-right space-y-2 max-w-xs">
                     <p className="text-sm text-stone-500 leading-relaxed">
-                      Curated coworking spaces for deep work, client meetings, and creative collaboration.
+                      Кураторская подборка коворкингов для глубокой работы, деловых встреч и творчества.
                     </p>
                     <div className="flex md:justify-end gap-1 text-[10px] font-bold uppercase tracking-tight text-stone-400">
-                      <span>Verified Data</span>
+                      <span>Проверено</span>
                       <span className="text-stone-300">•</span>
-                      <span>Real Atmosphere</span>
+                      <span>Живая атмосфера</span>
                     </div>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function App() {
 
               {/* Filters */}
               <div className="flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-stone-500 shrink-0">Filters:</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-stone-500 shrink-0">Фильтры:</span>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setFilters(prev => ({ ...prev, tags: [] }))}
@@ -201,7 +201,7 @@ export default function App() {
                         : 'bg-white border-stone-200 text-stone-600 hover:border-stone-400'
                     }`}
                   >
-                    All Spaces
+                    Все места
                   </button>
                   {availableTags.map(tag => (
                     <button
@@ -257,7 +257,7 @@ export default function App() {
                         </div>
                         
                         <p className="text-[11px] text-stone-500 font-medium">
-                          {space.neighborhood} • €{space.priceLevel * 12}/day
+                          {space.neighborhood} • {space.priceLevel * 400} ₽/день
                         </p>
 
                         <div className="flex flex-wrap gap-1 pt-1 opacity-70">
@@ -274,13 +274,13 @@ export default function App() {
                       <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-400">
                         <Info className="w-10 h-10" />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900">No spaces found</h3>
-                      <p className="text-gray-500">Try adjusting your filters or search query.</p>
+                      <h3 className="text-xl font-bold text-gray-900">Мест не найдено</h3>
+                      <p className="text-gray-500">Попробуйте изменить фильтры или запрос.</p>
                       <button 
-                        onClick={() => setFilters({ searchQuery: '', city: 'Limassol', tags: [] })}
-                        className="text-indigo-600 font-semibold hover:underline"
+                        onClick={() => setFilters({ searchQuery: '', city: 'Екатеринбург', tags: [] })}
+                        className="text-stone-600 font-bold uppercase text-[10px] tracking-widest hover:underline"
                       >
-                        Clear all filters
+                        Сбросить фильтры
                       </button>
                     </div>
                   )}
@@ -296,8 +296,8 @@ export default function App() {
               className="space-y-12"
             >
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold">Your Shortlist</h2>
-                <p className="text-gray-500">Compare your favorite spots side-by-side.</p>
+                <h2 className="text-3xl font-bold">Ваше Избранное</h2>
+                <p className="text-gray-500">Сравните ваши любимые места в одной таблице.</p>
               </div>
 
               {savedSpaces.length > 0 ? (
@@ -307,13 +307,13 @@ export default function App() {
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-stone-50/50">
-                          <th className="p-6 border-b border-stone-100 uppercase text-[10px] tracking-widest font-bold text-stone-400">Space</th>
-                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Price</th>
-                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Rating</th>
+                          <th className="p-6 border-b border-stone-100 uppercase text-[10px] tracking-widest font-bold text-stone-400">Место</th>
+                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Цена</th>
+                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Рейтинг</th>
                           <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Wi-Fi</th>
-                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Sockets</th>
-                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Noise</th>
-                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Action</th>
+                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Розетки</th>
+                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Шум</th>
+                          <th className="p-6 border-b border-stone-100 text-center uppercase text-[10px] tracking-widest font-bold text-stone-400">Действие</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -369,14 +369,14 @@ export default function App() {
                      <Heart className="w-12 h-12" />
                    </div>
                    <div className="space-y-2">
-                     <h3 className="text-2xl font-bold">Nothing saved yet</h3>
-                     <p className="text-gray-500 max-w-sm mx-auto">Click the heart icon on any space to add it to your comparison list.</p>
+                     <h3 className="text-2xl font-bold">Ничего не сохранено</h3>
+                     <p className="text-gray-500 max-w-sm mx-auto">Нажмите на сердечко у любого места, чтобы добавить его в список для сравнения.</p>
                    </div>
                    <button 
                     onClick={() => setActiveTab('discover')}
-                    className="bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all"
+                    className="bg-black text-white px-8 py-3 rounded-2xl font-bold shadow-xl shadow-black/10 hover:bg-stone-800 transition-all"
                    >
-                     Browse Spaces
+                     Перейти к обзору
                    </button>
                 </div>
               )}
@@ -402,39 +402,39 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="space-y-6">
              <div className="text-2xl font-black serif italic tracking-tighter">WorkSpace.</div>
-              <p className="text-sm text-stone-500 leading-relaxed">Curated coworking directory for the modern professional. Real data, vetted spaces, superior focus.</p>
+              <p className="text-sm text-stone-500 leading-relaxed">Кураторский справочник коворкингов для современного профессионала. Реальные данные, проверенные места.</p>
           </div>
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Product</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Продукт</h4>
             <ul className="space-y-3 text-sm font-medium text-stone-600">
-              <li><a href="#" className="hover:text-black transition-colors">Find Spaces</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Shortlist</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Add a Place</a></li>
+              <li><a href="#" className="hover:text-black transition-colors">Найти место</a></li>
+              <li><a href="#" className="hover:text-black transition-colors">Избранное</a></li>
+              <li><a href="#" className="hover:text-black transition-colors">Добавить место</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Cities</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Города</h4>
             <ul className="space-y-3 text-sm font-medium text-stone-600">
-              <li className="text-black font-bold ring-1 ring-stone-900/10 px-2 py-1 rounded inline-block">Limassol</li>
-              <li className="mt-2"><a href="#" className="hover:text-black transition-colors">Larnaca</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Nicosia</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Moscow</a></li>
+              <li className="text-black font-bold ring-1 ring-stone-900/10 px-2 py-1 rounded inline-block">Екатеринбург</li>
+              <li className="mt-2"><a href="#" className="hover:text-black transition-colors">Москва</a></li>
+              <li><a href="#" className="hover:text-black transition-colors">Санкт-Петербург</a></li>
+              <li><a href="#" className="hover:text-black transition-colors">Казань</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Connect</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 mb-6">Контакты</h4>
             <ul className="space-y-3 text-sm font-medium text-stone-600">
               <li>editorial@workspace.io</li>
-              <li>+357 99 000000</li>
+              <li>+7 343 000 00 00</li>
             </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-stone-400">
-          <p>© 2026 WORKSPACE PUBLISHING GROUP.</p>
+          <p>© 2026 WORKSPACE ЕКАТЕРИНБУРГ.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-black transition-colors">Privacy</a>
-            <a href="#" className="hover:text-black transition-colors">Terms</a>
-            <a href="#" className="hover:text-black transition-colors">Cookies</a>
+            <a href="#" className="hover:text-black transition-colors">Приватность</a>
+            <a href="#" className="hover:text-black transition-colors">Условия</a>
+            <a href="#" className="hover:text-black transition-colors">Куки</a>
           </div>
         </div>
       </footer>
@@ -444,9 +444,9 @@ export default function App() {
 
 function PriceIndicator({ level, light = false }: { level: number, light?: boolean }) {
   return (
-    <div className={`flex items-center gap-0.5 text-xs font-bold ${light ? 'text-white' : 'text-gray-900'}`}>
+    <div className={`flex items-center gap-0.5 text-xs font-bold ${light ? 'text-white' : 'text-stone-900'}`}>
       {[1, 2, 3, 4].map((i) => (
-        <span key={i} className={i <= level ? '' : 'opacity-30'}>€</span>
+        <span key={i} className={i <= level ? '' : 'opacity-30'}>₽</span>
       ))}
     </div>
   );
@@ -533,9 +533,9 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
             <div className="flex items-center justify-between">
                <div className="flex items-center gap-3">
                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">Premium Listing</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">ПРЕМИУМ РАЗМЕЩЕНИЕ</span>
                     <div className="w-1 h-1 bg-stone-300 rounded-full"></div>
-                    <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">Open Now</span>
+                    <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">ОТКРЫТО</span>
                   </div>
                </div>
                <div className="flex items-center gap-3">
@@ -543,10 +543,10 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
                   onClick={onToggleSave}
                   className={`px-5 py-2.5 border rounded-full text-sm font-bold transition-all ${isSaved ? 'bg-black text-white border-black' : 'border-stone-200 text-stone-900 hover:bg-stone-50'}`}
                  >
-                    {isSaved ? 'Saved to List' : 'Save Space'}
+                    {isSaved ? 'В избранном' : 'В избранное'}
                  </button>
                  <button className="px-5 py-2.5 bg-black text-white rounded-full text-sm font-bold shadow-lg shadow-black/10 hover:bg-stone-800 transition-all">
-                    Get Directions
+                    Маршрут
                  </button>
                </div>
             </div>
@@ -563,15 +563,15 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100">
-              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Wi-Fi Quality</div>
+              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Качество Wi-Fi</div>
               <div className="text-2xl font-bold">{space.wifiScore}.0<span className="text-xs text-stone-400 font-normal">/5.0</span></div>
               <div className="w-full h-1 bg-stone-200 mt-3 rounded-full">
                 <div className={`h-full rounded-full ${space.wifiScore >= 4 ? 'bg-green-500' : 'bg-yellow-500'}`} style={{ width: `${(space.wifiScore/5)*100}%` }}></div>
               </div>
             </div>
             <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100">
-              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Noise Level</div>
-              <div className="text-2xl font-bold italic serif capitalize">{space.noiseLevel}</div>
+              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Уровень шума</div>
+              <div className="text-2xl font-bold italic serif capitalize">{space.noiseLevel === 'quiet' ? 'Тихо' : space.noiseLevel === 'moderate' ? 'Умеренно' : 'Шумно'}</div>
               <div className="flex gap-1 mt-3">
                 <div className={`h-1 w-4 rounded-full ${space.noiseLevel === 'quiet' ? 'bg-green-500' : space.noiseLevel === 'moderate' ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
                 <div className={`h-1 w-4 rounded-full ${space.noiseLevel === 'moderate' || space.noiseLevel === 'loud' ? (space.noiseLevel === 'loud' ? 'bg-red-500' : 'bg-yellow-500') : 'bg-stone-200'}`}></div>
@@ -579,24 +579,24 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
               </div>
             </div>
             <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100">
-              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Sockets</div>
-              <div className="text-2xl font-bold">{space.socketScore >= 4 ? 'High' : 'Medium'}</div>
-              <div className="text-[10px] text-stone-400 mt-1 uppercase font-bold">Standard Availability</div>
+              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Розетки</div>
+              <div className="text-2xl font-bold">{space.socketScore >= 4 ? 'Много' : 'Средне'}</div>
+              <div className="text-[10px] text-stone-400 mt-1 uppercase font-bold">Стандартная доступность</div>
             </div>
             <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100">
-              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Call-Friendly</div>
-              <div className="text-2xl font-bold">{space.callFriendly ? 'Yes' : 'Limited'}</div>
-              <div className="text-[10px] text-stone-400 mt-1 uppercase font-bold">Privacy Booths: 4</div>
+              <div className="text-[10px] uppercase font-bold text-stone-400 mb-2 tracking-wider">Для звонков</div>
+              <div className="text-2xl font-bold">{space.callFriendly ? 'Да' : 'Ограничено'}</div>
+              <div className="text-[10px] text-stone-400 mt-1 uppercase font-bold">Zoom-румы: 4</div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <section className="space-y-6">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 border-b border-stone-100 pb-3">The Atmosphere</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 border-b border-stone-100 pb-3">Атмосфера</h3>
               <p className="text-stone-600 leading-relaxed serif text-lg italic">"{space.description}"</p>
               
               <div className="space-y-2">
-                <h4 className="text-[10px] font-black uppercase text-stone-400">Amenities</h4>
+                <h4 className="text-[10px] font-black uppercase text-stone-400">Удобства</h4>
                 <div className="flex flex-wrap gap-2">
                   {space.tags.map(tag => (
                     <span key={tag} className="px-3 py-1.5 bg-stone-100 text-stone-700 text-[10px] font-bold rounded-lg uppercase tracking-wider">{tag}</span>
@@ -606,7 +606,7 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
             </section>
 
             <section className="space-y-6">
-               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 border-b border-stone-100 pb-3">Recommended For</h3>
+               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 border-b border-stone-100 pb-3">Рекомендуется для</h3>
                <div className="grid grid-cols-1 gap-2">
                  {space.bestFor.map((item, idx) => {
                    const colors = [
@@ -624,15 +624,15 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
                </div>
 
                <div className="space-y-4 mt-8">
-                 <h4 className="text-[10px] font-black uppercase text-stone-400">Pricing</h4>
+                 <h4 className="text-[10px] font-black uppercase text-stone-400">Цены</h4>
                  <div className="space-y-3">
                    <div className="flex justify-between text-sm font-medium">
-                     <span className="text-stone-400">Daily Pass</span>
-                     <span className="font-bold">€{space.priceLevel * 12}</span>
+                     <span className="text-stone-400">Дневной тариф</span>
+                     <span className="font-bold">{space.priceLevel * 400} ₽</span>
                    </div>
                    <div className="flex justify-between text-sm font-medium">
-                     <span className="text-stone-400">Weekly Access</span>
-                     <span className="font-bold">€{space.priceLevel * 60}</span>
+                     <span className="text-stone-400">Недельный абонемент</span>
+                     <span className="font-bold">{space.priceLevel * 2000} ₽</span>
                    </div>
                  </div>
                </div>
@@ -641,7 +641,7 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
 
           {/* Reviews */}
           <section className="space-y-8 pt-12 border-t border-stone-100">
-             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 mb-8 border-b border-stone-100 pb-3">Review Highlights</h3>
+             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-400 mb-8 border-b border-stone-100 pb-3">Главное из отзывов</h3>
 
              <div className="space-y-6">
                 {space.reviews.length > 0 ? space.reviews.map(review => (
@@ -664,13 +664,13 @@ function SpaceDetailsModal({ space, isOpen, onClose, onToggleSave, isSaved }: { 
                   </div>
                 )) : (
                   <div className="text-center py-12 border-2 border-dashed border-stone-100 rounded-3xl">
-                    <p className="text-stone-300 font-bold uppercase text-[10px] tracking-widest">No testimonials yet</p>
+                    <p className="text-stone-300 font-bold uppercase text-[10px] tracking-widest">Пока нет отзывов</p>
                   </div>
                 )}
              </div>
 
              <button className="w-full py-4 border-2 border-dashed border-stone-200 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 hover:border-stone-400 hover:text-stone-600 transition-all">
-                Submit an Editorial Review
+                Оставить отзыв
              </button>
           </section>
         </div>
