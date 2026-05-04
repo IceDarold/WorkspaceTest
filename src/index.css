@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Georgia', serif;
+  
+  --color-editorial-bg: #F7F6F2;
+  --color-editorial-text: #1A1A1A;
+}
+
+@layer base {
+  body {
+    @apply bg-editorial-bg text-editorial-text font-sans;
+  }
+  
+  .serif {
+    @apply font-serif;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
